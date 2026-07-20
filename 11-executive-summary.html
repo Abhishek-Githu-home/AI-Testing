@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive Summary: OrangeHRM Quality Assessment — OrangeHRM QA</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --ink: #1f2430; --muted: #5b6472;
+    --accent: #146c60; --accent-soft: #e3f1ee; --border: #e2e6ec;
+    --code-bg: #f0f2f5; --th-bg: #eef1f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161b; --panel: #1c1f26; --ink: #e8eaf0; --muted: #9aa3b2;
+      --accent: #4fd1bb; --accent-soft: #1d3330; --border: #2b303a;
+      --code-bg: #262b34; --th-bg: #232833;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.65 "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  .layout { display: flex; min-height: 100vh; }
+  nav.sidebar {
+    width: 260px; flex-shrink: 0; padding: 24px 16px; border-right: 1px solid var(--border);
+    background: var(--panel); position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  nav.sidebar h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 12px; }
+  nav.sidebar a {
+    display: block; padding: 7px 10px; margin: 2px 0; border-radius: 8px;
+    color: var(--ink); text-decoration: none; font-size: 13.5px;
+  }
+  nav.sidebar a:hover { background: var(--accent-soft); }
+  nav.sidebar a.current { background: var(--accent); color: #fff; }
+  nav.sidebar .home { font-weight: 600; margin-bottom: 10px; color: var(--accent); }
+  main {
+    flex: 1; min-width: 0; padding: 40px clamp(20px, 5vw, 64px); max-width: 1080px;
+  }
+  main h1 { font-size: 30px; line-height: 1.25; border-bottom: 3px solid var(--accent); padding-bottom: 12px; }
+  main h2 { font-size: 22px; margin-top: 2.2em; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  main h3 { font-size: 17px; margin-top: 1.8em; }
+  a { color: var(--accent); }
+  .table-wrap { overflow-x: auto; margin: 1.2em 0; border: 1px solid var(--border); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { border-bottom: 1px solid var(--border); padding: 9px 12px; text-align: left; vertical-align: top; }
+  td + td, th + th { border-left: 1px solid var(--border); }
+  th { background: var(--th-bg); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--accent-soft); }
+  code { background: var(--code-bg); border-radius: 5px; padding: 2px 6px; font-size: .88em; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid var(--accent); margin: 1em 0; padding: 4px 18px; background: var(--panel); border-radius: 0 8px 8px 0; color: var(--muted); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2.5em 0; }
+  .crumb { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .crumb a { color: var(--muted); }
+  footer { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  /* hub page */
+  .hero { margin: 0 0 8px; }
+  .hero p.sub { color: var(--muted); max-width: 70ch; margin-top: 4px; }
+  .phase { margin-top: 34px; }
+  .phase h2 { border: none; margin: 0 0 14px; font-size: 15px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+  .card {
+    display: block; background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    padding: 18px 20px; text-decoration: none; color: var(--ink); transition: transform .12s, border-color .12s;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .num { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .05em; }
+  .card h3 { margin: 6px 0 8px; font-size: 16px; line-height: 1.35; }
+  .card p { margin: 0; font-size: 13.5px; color: var(--muted); }
+  @media (max-width: 860px) {
+    .layout { display: block; }
+    nav.sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); }
+  }
+  @media print { nav.sidebar { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+    <h2>QA Deliverables</h2>
+    <a href="index.html" class="home">⌂ Package overview</a>
+    <a href="01-sdlc-mapping.html">01 · SDLC Mapping: OrangeHRM Test Automation Project</a>
+<a href="02-stlc-mapping.html">02 · STLC Mapping: OrangeHRM Test Automation Project</a>
+<a href="03-test-plan.html">03 · Test Plan: OrangeHRM Demo Automation</a>
+<a href="04-hld-automation-framework.html">04 · High-Level Design (HLD): Automation Framework</a>
+<a href="05-lld-login-pim.html">05 · Low-Level Design (LLD): Login &amp; PIM Modules</a>
+<a href="06-test-case-catalogue.html">06 · Test Case Catalogue &amp; RTM: OrangeHRM Demo Automation</a>
+<a href="07-defect-reports.html">07 · Defect Reports: OrangeHRM Demo Automation</a>
+<a href="08-severity-priority-justification.html">08 · Severity vs. Priority Justification Note</a>
+<a href="09-test-execution-summary.html">09 · Test Execution Summary Report</a>
+<a href="10-test-closure-report.html">10 · Test Closure Report (STLC Exit Phase)</a>
+<a href="11-executive-summary.html" class="current">11 · Executive Summary: OrangeHRM Quality Assessment</a>
+  </nav>
+<main>
+<p class="crumb"><a href="index.html">Package overview</a> / 11</p>
+<h1>Artifact 11 — Executive Summary: OrangeHRM Quality Assessment</h1>
+<p><strong>For:</strong> Client stakeholders (non-technical) | <strong>From:</strong> QA Lead | <strong>Date:</strong> 20 July 2026 | <strong>One page</strong></p>
+<hr>
+<h2>What we did</h2>
+<p>Over a six-week engagement we tested the five most business-critical areas of the OrangeHRM system: <strong>signing in, managing user accounts, maintaining employee records, requesting leave, and the home dashboard</strong>. Every important behaviour was written down as a formal test (55 in total), and each test was automated twice, using two independent industry-standard tools, so results could be cross-checked. The full set of checks now runs automatically every night and on every code change — meaning future updates to the system will be verified within minutes, not days.</p>
+<h2>Overall quality assessment</h2>
+<p><strong>The core of the system is in good shape.</strong> Signing in, employee record-keeping, and user administration passed every test, repeatedly, including deliberate attempts to break them with bad input. Of 53 checks completed, 52 passed — a 98% pass rate, with both tool sets in full agreement.</p>
+<p>We found <strong>four genuine issues</strong>. Two matter for a launch decision:</p>
+<ol>
+<li><strong>Leave requests can be saved with impossible dates.</strong> If a user types dates by hand (rather than clicking the calendar), the system accepts a leave request that <em>ends before it starts</em>. These invalid records flow into approvals and leave balances. The data damage is silent, which is exactly the kind of issue that gets expensive if it reaches production. A fix is straightforward and well understood.</li>
+<li><strong>The platform occasionally fails to load at all.</strong> Roughly one page-load in a dozen, during busy periods, the login page returns a server error for a few seconds. We believe this is the shared demo server rather than the application itself — but that must be confirmed on production-grade infrastructure before launch, because when it happens, nobody can use the system.</li>
+</ol>
+<p>The other two issues are minor: a screen that shows an employee&#39;s old name until refreshed after a rename, and a technical error message in the browser&#39;s background log that users never see.</p>
+<h2>Key risks</h2>
+<ul>
+<li><strong>Data integrity in Leave</strong> (issue 1) is the main business risk — it corrupts records quietly.</li>
+<li><strong>Platform stability</strong> (issue 2) is unquantified until tested on real infrastructure.</li>
+<li>Two leave-related checks could not be completed because the shared demo environment erases its data periodically; they are scheduled for a re-run. This is a limitation of the demo environment, not of the system&#39;s design.</li>
+</ul>
+<h2>Recommendation: <strong>GO, with two conditions</strong></h2>
+<p>We recommend proceeding, <strong>conditional on</strong>:</p>
+<ol>
+<li>Fixing the leave date-entry issue and re-running the affected checks (small, well-scoped fix);</li>
+<li>A short stability check of the login service on production-representative infrastructure.</li>
+</ol>
+<p>Sign-in, employee records, user administration, and the dashboard are ready today. Once the two conditions are met, the automated test suite — which now guards all five areas on every future change — gives strong ongoing protection against regressions.</p>
+<hr>
+<p><em>Full technical detail: Defect Reports (Artifact 7), Execution Summary (Artifact 9), Closure Report (Artifact 10).</em></p>
+
+<footer>
+  <span>OrangeHRM Demo Automation — QA engagement package</span>
+  <span>Source: docs/11-executive-summary.md</span>
+</footer>
+</main>
+</div>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  mermaid.initialize({ startOnLoad: true, theme: dark ? "dark" : "neutral" });
+</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SDLC Mapping: OrangeHRM Test Automation Project — OrangeHRM QA</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --ink: #1f2430; --muted: #5b6472;
+    --accent: #146c60; --accent-soft: #e3f1ee; --border: #e2e6ec;
+    --code-bg: #f0f2f5; --th-bg: #eef1f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161b; --panel: #1c1f26; --ink: #e8eaf0; --muted: #9aa3b2;
+      --accent: #4fd1bb; --accent-soft: #1d3330; --border: #2b303a;
+      --code-bg: #262b34; --th-bg: #232833;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.65 "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  .layout { display: flex; min-height: 100vh; }
+  nav.sidebar {
+    width: 260px; flex-shrink: 0; padding: 24px 16px; border-right: 1px solid var(--border);
+    background: var(--panel); position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  nav.sidebar h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 12px; }
+  nav.sidebar a {
+    display: block; padding: 7px 10px; margin: 2px 0; border-radius: 8px;
+    color: var(--ink); text-decoration: none; font-size: 13.5px;
+  }
+  nav.sidebar a:hover { background: var(--accent-soft); }
+  nav.sidebar a.current { background: var(--accent); color: #fff; }
+  nav.sidebar .home { font-weight: 600; margin-bottom: 10px; color: var(--accent); }
+  main {
+    flex: 1; min-width: 0; padding: 40px clamp(20px, 5vw, 64px); max-width: 1080px;
+  }
+  main h1 { font-size: 30px; line-height: 1.25; border-bottom: 3px solid var(--accent); padding-bottom: 12px; }
+  main h2 { font-size: 22px; margin-top: 2.2em; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  main h3 { font-size: 17px; margin-top: 1.8em; }
+  a { color: var(--accent); }
+  .table-wrap { overflow-x: auto; margin: 1.2em 0; border: 1px solid var(--border); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { border-bottom: 1px solid var(--border); padding: 9px 12px; text-align: left; vertical-align: top; }
+  td + td, th + th { border-left: 1px solid var(--border); }
+  th { background: var(--th-bg); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--accent-soft); }
+  code { background: var(--code-bg); border-radius: 5px; padding: 2px 6px; font-size: .88em; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid var(--accent); margin: 1em 0; padding: 4px 18px; background: var(--panel); border-radius: 0 8px 8px 0; color: var(--muted); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2.5em 0; }
+  .crumb { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .crumb a { color: var(--muted); }
+  footer { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  /* hub page */
+  .hero { margin: 0 0 8px; }
+  .hero p.sub { color: var(--muted); max-width: 70ch; margin-top: 4px; }
+  .phase { margin-top: 34px; }
+  .phase h2 { border: none; margin: 0 0 14px; font-size: 15px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+  .card {
+    display: block; background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    padding: 18px 20px; text-decoration: none; color: var(--ink); transition: transform .12s, border-color .12s;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .num { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .05em; }
+  .card h3 { margin: 6px 0 8px; font-size: 16px; line-height: 1.35; }
+  .card p { margin: 0; font-size: 13.5px; color: var(--muted); }
+  @media (max-width: 860px) {
+    .layout { display: block; }
+    nav.sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); }
+  }
+  @media print { nav.sidebar { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+    <h2>QA Deliverables</h2>
+    <a href="index.html" class="home">⌂ Package overview</a>
+    <a href="01-sdlc-mapping.html" class="current">01 · SDLC Mapping: OrangeHRM Test Automation Project</a>
+<a href="02-stlc-mapping.html">02 · STLC Mapping: OrangeHRM Test Automation Project</a>
+<a href="03-test-plan.html">03 · Test Plan: OrangeHRM Demo Automation</a>
+<a href="04-hld-automation-framework.html">04 · High-Level Design (HLD): Automation Framework</a>
+<a href="05-lld-login-pim.html">05 · Low-Level Design (LLD): Login &amp; PIM Modules</a>
+<a href="06-test-case-catalogue.html">06 · Test Case Catalogue &amp; RTM: OrangeHRM Demo Automation</a>
+<a href="07-defect-reports.html">07 · Defect Reports: OrangeHRM Demo Automation</a>
+<a href="08-severity-priority-justification.html">08 · Severity vs. Priority Justification Note</a>
+<a href="09-test-execution-summary.html">09 · Test Execution Summary Report</a>
+<a href="10-test-closure-report.html">10 · Test Closure Report (STLC Exit Phase)</a>
+<a href="11-executive-summary.html">11 · Executive Summary: OrangeHRM Quality Assessment</a>
+  </nav>
+<main>
+<p class="crumb"><a href="index.html">Package overview</a> / 01</p>
+<h1>Artifact 1 — SDLC Mapping: OrangeHRM Test Automation Project</h1>
+<p><strong>Project:</strong> OrangeHRM Demo Automation (Login, Admin, PIM, Leave, Dashboard)
+<strong>AUT:</strong> <a href="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login">https://opensource-demo.orangehrmlive.com/web/index.php/auth/login</a>
+<strong>Author:</strong> QA Lead | <strong>Status:</strong> Baseline v1.0</p>
+<p>This project is a QA-side engagement against an already-built application, so the SDLC mapping below describes how the <em>automation project itself</em> moves through each phase, and how it hooks into the phases of the product it tests.</p>
+<hr>
+<h2>Phase 1 — Requirements</h2>
+<p><strong>Generic purpose:</strong> Capture what the system must do.</p>
+<p><strong>For this project:</strong></p>
+<ul>
+<li>Treat the OrangeHRM demo application&#39;s existing behaviour as the requirements baseline (there is no formal SRS — behaviour is discovered by exploration, which mirrors many real brownfield engagements).</li>
+<li>Define automation requirements: which modules are in scope (Login, Admin user management, PIM employee records, Leave, Dashboard), which flows are business-critical, and which are explicitly out of scope (e.g., Buzz, Performance, mobile).</li>
+<li>Capture non-functional requirements for the framework itself: must run in both Cypress and Playwright (JavaScript), must run headless in CI, must produce shareable HTML reports, must tolerate the shared/reset nature of the public demo environment.</li>
+<li><strong>Output:</strong> scoped requirement list per module, automation feasibility notes (e.g., demo data resets periodically, so tests must create their own data).</li>
+</ul>
+<h2>Phase 2 — Design</h2>
+<p><strong>Generic purpose:</strong> Decide how the system will be built.</p>
+<p><strong>For this project:</strong></p>
+<ul>
+<li>Produce the HLD (framework architecture, Page Object Model, tooling, CI) and LLDs (per-module page object and test design) — Artifacts 4 and 5.</li>
+<li>Design the locator strategy up front, because OrangeHRM&#39;s DOM (OrangeHRM UI = <code>oxd-*</code> component classes, few stable IDs) drives most flakiness risk.</li>
+<li>Design test data management: fixture files for static data, runtime generation (unique employee names/IDs) for anything the test creates, since the demo site is shared.</li>
+<li><strong>Output:</strong> HLD document, LLD documents, folder-structure convention, naming conventions.</li>
+</ul>
+<h2>Phase 3 — Build (Implementation)</h2>
+<p><strong>Generic purpose:</strong> Write the code.</p>
+<p><strong>For this project:</strong></p>
+<ul>
+<li>Implement page objects, fixtures, utilities, and spec files for each module — Login and Dashboard first (smallest, gate everything else), then Admin, PIM, Leave.</li>
+<li>Two parallel implementations (Cypress and Playwright) sharing the same design and test cases, which demonstrates tool-agnostic framework thinking.</li>
+<li>Code review conventions apply to test code exactly as they would to product code: PRs per module, lint (ESLint), no hard-coded waits, no credentials in code (env variables / <code>.env</code> excluded from git).</li>
+<li><strong>Output:</strong> working automation code per module, merged via reviewed PRs.</li>
+</ul>
+<h2>Phase 4 — Test</h2>
+<p><strong>Generic purpose:</strong> Verify the system.</p>
+<p><strong>For this project (testing the tests):</strong></p>
+<ul>
+<li>Verify the automation itself: run each suite locally 3× consecutively to shake out flakiness before it is considered &quot;done&quot;.</li>
+<li>Cross-browser verification (Chromium, Firefox, WebKit in Playwright; Chrome, Edge in Cypress).</li>
+<li>Negative verification: deliberately break a locator or assertion and confirm the failure report is diagnosable (screenshot, trace, clear message).</li>
+<li><strong>Output:</strong> stable suites with a documented flake rate (target: &lt;2% over 10 CI runs).</li>
+</ul>
+<h2>Phase 5 — Deploy</h2>
+<p><strong>Generic purpose:</strong> Release to users.</p>
+<p><strong>For this project:</strong></p>
+<ul>
+<li>&quot;Deployment&quot; = wiring suites into CI (GitHub Actions): smoke suite on every push/PR, full regression nightly against the demo URL.</li>
+<li>Publish HTML reports as CI artifacts; failures notify via the PR check status.</li>
+<li>Tag a versioned release of the framework once all five modules are automated.</li>
+<li><strong>Output:</strong> green CI pipeline, published reports, tagged release.</li>
+</ul>
+<h2>Phase 6 — Maintain</h2>
+<p><strong>Generic purpose:</strong> Keep the system healthy over time.</p>
+<p><strong>For this project:</strong></p>
+<ul>
+<li>The OrangeHRM demo is periodically upgraded and its data resets — expect locator and data breakage. Triage failures weekly: product change vs. test defect vs. environment flake.</li>
+<li>Maintain a known-issues list for demo-environment quirks (e.g., slow cold starts, shared-tenant data collisions).</li>
+<li>Refactor page objects as duplication appears; keep both tool implementations in feature parity.</li>
+<li><strong>Output:</strong> changelog, updated suites, quarterly review of coverage vs. scope.</li>
+</ul>
+<hr>
+<h2>Summary table</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>SDLC phase</th>
+<th>This project&#39;s activity</th>
+<th>Key output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Requirements</td>
+<td>Scope 5 modules, discover behaviour, define framework NFRs</td>
+<td>Scoped requirements list</td>
+</tr>
+<tr>
+<td>Design</td>
+<td>HLD + LLD, locator &amp; data strategy</td>
+<td>Artifacts 4 &amp; 5</td>
+</tr>
+<tr>
+<td>Build</td>
+<td>Page objects, specs, fixtures in Cypress + Playwright</td>
+<td>Reviewed, merged code</td>
+</tr>
+<tr>
+<td>Test</td>
+<td>Stabilise suites, cross-browser, failure diagnosability</td>
+<td>Flake rate &lt; 2%</td>
+</tr>
+<tr>
+<td>Deploy</td>
+<td>GitHub Actions smoke + nightly regression, reports</td>
+<td>Green pipeline, release tag</td>
+</tr>
+<tr>
+<td>Maintain</td>
+<td>Weekly triage, locator/data upkeep, parity between tools</td>
+<td>Changelog, coverage review</td>
+</tr>
+</tbody></table></div>
+
+<footer>
+  <span>OrangeHRM Demo Automation — QA engagement package</span>
+  <span>Source: docs/01-sdlc-mapping.md</span>
+</footer>
+</main>
+</div>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  mermaid.initialize({ startOnLoad: true, theme: dark ? "dark" : "neutral" });
+</script>
+</body>
+</html>

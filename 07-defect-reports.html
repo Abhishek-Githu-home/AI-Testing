@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Defect Reports: OrangeHRM Demo Automation — OrangeHRM QA</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --ink: #1f2430; --muted: #5b6472;
+    --accent: #146c60; --accent-soft: #e3f1ee; --border: #e2e6ec;
+    --code-bg: #f0f2f5; --th-bg: #eef1f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161b; --panel: #1c1f26; --ink: #e8eaf0; --muted: #9aa3b2;
+      --accent: #4fd1bb; --accent-soft: #1d3330; --border: #2b303a;
+      --code-bg: #262b34; --th-bg: #232833;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.65 "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  .layout { display: flex; min-height: 100vh; }
+  nav.sidebar {
+    width: 260px; flex-shrink: 0; padding: 24px 16px; border-right: 1px solid var(--border);
+    background: var(--panel); position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  nav.sidebar h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 12px; }
+  nav.sidebar a {
+    display: block; padding: 7px 10px; margin: 2px 0; border-radius: 8px;
+    color: var(--ink); text-decoration: none; font-size: 13.5px;
+  }
+  nav.sidebar a:hover { background: var(--accent-soft); }
+  nav.sidebar a.current { background: var(--accent); color: #fff; }
+  nav.sidebar .home { font-weight: 600; margin-bottom: 10px; color: var(--accent); }
+  main {
+    flex: 1; min-width: 0; padding: 40px clamp(20px, 5vw, 64px); max-width: 1080px;
+  }
+  main h1 { font-size: 30px; line-height: 1.25; border-bottom: 3px solid var(--accent); padding-bottom: 12px; }
+  main h2 { font-size: 22px; margin-top: 2.2em; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  main h3 { font-size: 17px; margin-top: 1.8em; }
+  a { color: var(--accent); }
+  .table-wrap { overflow-x: auto; margin: 1.2em 0; border: 1px solid var(--border); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { border-bottom: 1px solid var(--border); padding: 9px 12px; text-align: left; vertical-align: top; }
+  td + td, th + th { border-left: 1px solid var(--border); }
+  th { background: var(--th-bg); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--accent-soft); }
+  code { background: var(--code-bg); border-radius: 5px; padding: 2px 6px; font-size: .88em; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid var(--accent); margin: 1em 0; padding: 4px 18px; background: var(--panel); border-radius: 0 8px 8px 0; color: var(--muted); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2.5em 0; }
+  .crumb { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .crumb a { color: var(--muted); }
+  footer { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  /* hub page */
+  .hero { margin: 0 0 8px; }
+  .hero p.sub { color: var(--muted); max-width: 70ch; margin-top: 4px; }
+  .phase { margin-top: 34px; }
+  .phase h2 { border: none; margin: 0 0 14px; font-size: 15px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+  .card {
+    display: block; background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    padding: 18px 20px; text-decoration: none; color: var(--ink); transition: transform .12s, border-color .12s;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .num { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .05em; }
+  .card h3 { margin: 6px 0 8px; font-size: 16px; line-height: 1.35; }
+  .card p { margin: 0; font-size: 13.5px; color: var(--muted); }
+  @media (max-width: 860px) {
+    .layout { display: block; }
+    nav.sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); }
+  }
+  @media print { nav.sidebar { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+    <h2>QA Deliverables</h2>
+    <a href="index.html" class="home">⌂ Package overview</a>
+    <a href="01-sdlc-mapping.html">01 · SDLC Mapping: OrangeHRM Test Automation Project</a>
+<a href="02-stlc-mapping.html">02 · STLC Mapping: OrangeHRM Test Automation Project</a>
+<a href="03-test-plan.html">03 · Test Plan: OrangeHRM Demo Automation</a>
+<a href="04-hld-automation-framework.html">04 · High-Level Design (HLD): Automation Framework</a>
+<a href="05-lld-login-pim.html">05 · Low-Level Design (LLD): Login &amp; PIM Modules</a>
+<a href="06-test-case-catalogue.html">06 · Test Case Catalogue &amp; RTM: OrangeHRM Demo Automation</a>
+<a href="07-defect-reports.html" class="current">07 · Defect Reports: OrangeHRM Demo Automation</a>
+<a href="08-severity-priority-justification.html">08 · Severity vs. Priority Justification Note</a>
+<a href="09-test-execution-summary.html">09 · Test Execution Summary Report</a>
+<a href="10-test-closure-report.html">10 · Test Closure Report (STLC Exit Phase)</a>
+<a href="11-executive-summary.html">11 · Executive Summary: OrangeHRM Quality Assessment</a>
+  </nav>
+<main>
+<p class="crumb"><a href="index.html">Package overview</a> / 07</p>
+<h1>Artifact 7 — Defect Reports: OrangeHRM Demo Automation</h1>
+<p><strong>Document ID:</strong> DR-OHRM-001 | <strong>Version:</strong> 1.0 | <strong>Author:</strong> QA Lead | <strong>Date:</strong> 2026-07-20
+<strong>Defect log convention:</strong> per Test Plan §3 — GitHub Issues, labelled <code>aut-bug</code>, severity Critical/High/Medium/Low, priority P1–P4. Script defects (<code>test-bug</code>) are tracked separately and listed in the closure report.</p>
+<hr>
+<h2>DEF-OHRM-001 — Intermittent HTTP 500 on the login page</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Defect ID</strong></td>
+<td>DEF-OHRM-001</td>
+</tr>
+<tr>
+<td><strong>Title</strong></td>
+<td><code>/web/index.php/auth/login</code> intermittently returns HTTP 500, blocking all access</td>
+</tr>
+<tr>
+<td><strong>Module</strong></td>
+<td>Login (platform-wide impact)</td>
+</tr>
+<tr>
+<td><strong>Steps to Reproduce</strong></td>
+<td>1. Perform several successive login/logout cycles (observed during automated regression, ~10–20 requests over a few minutes) 2. Navigate to the login URL 3. Intermittently the server responds <code>500 Internal Server Error</code> instead of the login form</td>
+</tr>
+<tr>
+<td><strong>Expected Result</strong></td>
+<td>Login page returns HTTP 200 and renders the credential form on every request</td>
+</tr>
+<tr>
+<td><strong>Actual Result</strong></td>
+<td>Sporadic <code>500 Internal Server Error</code>; the page recovers on retry after a few seconds</td>
+</tr>
+<tr>
+<td><strong>Severity</strong></td>
+<td><strong>Critical</strong></td>
+</tr>
+<tr>
+<td><strong>Priority</strong></td>
+<td><strong>P2</strong></td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>OrangeHRM Open Source demo (opensource-demo.orangehrmlive.com), observed 2026-07-20 during Cypress 15.18.1 headless regression (Electron 136), Windows 11; reproducible independent of browser</td>
+</tr>
+<tr>
+<td><strong>Evidence</strong></td>
+<td><code>[screenshot: cypress-run-500-login.png]</code> · CI log excerpt: <code>cy.visit() failed ... The response we received from your web server was: &gt; 500: Internal Server Error</code> (full-suite run #2, 2026-07-20)</td>
+</tr>
+<tr>
+<td><strong>Reproducibility</strong></td>
+<td>Intermittent (~1 in 10–15 page loads under repeated authentication activity)</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>Open — reported; suspected infrastructure/rate-limit behaviour on the shared tenant, needs server-side log correlation</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>DEF-OHRM-002 — Unhandled JavaScript exception during logout navigation</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Defect ID</strong></td>
+<td>DEF-OHRM-002</td>
+</tr>
+<tr>
+<td><strong>Title</strong></td>
+<td>Unhandled <code>TypeError: Cannot read properties of undefined (reading &#39;response&#39;)</code> thrown when navigation cancels in-flight dashboard requests</td>
+</tr>
+<tr>
+<td><strong>Module</strong></td>
+<td>Dashboard / global SPA error handling</td>
+</tr>
+<tr>
+<td><strong>Steps to Reproduce</strong></td>
+<td>1. Log in as Admin 2. Land on Dashboard (widget XHRs begin loading) 3. Immediately open the user menu and click <strong>Logout</strong> 4. Observe the browser console</td>
+</tr>
+<tr>
+<td><strong>Expected Result</strong></td>
+<td>Cancelled/401&#39;d XHRs during navigation are handled gracefully; no uncaught exceptions reach the console</td>
+</tr>
+<tr>
+<td><strong>Actual Result</strong></td>
+<td>Dashboard widget calls (<code>api/v2/buzz/feed</code>, <code>api/v2/dashboard/shortcuts</code>) return 401 mid-teardown and the response interceptor throws an uncaught <code>TypeError</code>; thrown twice per occurrence</td>
+</tr>
+<tr>
+<td><strong>Severity</strong></td>
+<td><strong>Low</strong></td>
+</tr>
+<tr>
+<td><strong>Priority</strong></td>
+<td><strong>P3</strong></td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>Same as DEF-OHRM-001; observed consistently on logout in Chromium-family browsers</td>
+</tr>
+<tr>
+<td><strong>Evidence</strong></td>
+<td><code>[screenshot: logout-uncaught-typeerror.png]</code> (captured by Cypress on TC-LOG-008, run #1, 2026-07-20) — console shows <code>(uncaught exception) TypeError: Cannot read properties of undefined (reading &#39;response&#39;) (2)</code></td>
+</tr>
+<tr>
+<td><strong>Reproducibility</strong></td>
+<td>Consistent when logout occurs while dashboard XHRs are in flight</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>Open</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>DEF-OHRM-003 — Leave Apply accepts an invalid date range when dates are typed manually</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Defect ID</strong></td>
+<td>DEF-OHRM-003</td>
+</tr>
+<tr>
+<td><strong>Title</strong></td>
+<td>&quot;To&quot; date earlier than &quot;From&quot; date is accepted on Apply Leave when entered via keyboard; validation fires only for calendar-widget selection</td>
+</tr>
+<tr>
+<td><strong>Module</strong></td>
+<td>Leave &gt; Apply</td>
+</tr>
+<tr>
+<td><strong>Steps to Reproduce</strong></td>
+<td>1. Log in as Admin (leave entitlement present) 2. Leave &gt; Apply 3. Select a leave type 4. <strong>Type</strong> From Date <code>2026-08-10</code> and To Date <code>2026-08-08</code> directly into the fields (do not use the calendar popup) 5. Click <strong>Apply</strong></td>
+</tr>
+<tr>
+<td><strong>Expected Result</strong></td>
+<td>Validation error (&quot;To date should be after from date&quot;), submission blocked — as correctly happens when dates are picked from the calendar widget</td>
+</tr>
+<tr>
+<td><strong>Actual Result</strong></td>
+<td>The form submits; a leave request with an inverted date range is created and appears in My Leave with a negative/zero duration</td>
+</tr>
+<tr>
+<td><strong>Severity</strong></td>
+<td><strong>High</strong></td>
+</tr>
+<tr>
+<td><strong>Priority</strong></td>
+<td><strong>P2</strong></td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>OrangeHRM demo, Chrome 138 / Firefox 128, verified in exploratory follow-up after automated TC-LEA-004 failed on this path</td>
+</tr>
+<tr>
+<td><strong>Evidence</strong></td>
+<td><code>[screenshot: leave-inverted-range-accepted.png]</code> · <code>[screenshot: my-leave-negative-duration-row.png]</code> · failing case: TC-LEA-004 (both frameworks)</td>
+</tr>
+<tr>
+<td><strong>Reproducibility</strong></td>
+<td>Consistent via keyboard entry; not reproducible via calendar picker</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>Open</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>DEF-OHRM-004 — Employee name header shows stale value after Personal Details edit</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Defect ID</strong></td>
+<td>DEF-OHRM-004</td>
+</tr>
+<tr>
+<td><strong>Title</strong></td>
+<td>After editing an employee&#39;s last name in Personal Details, the page header keeps showing the old name until a manual reload</td>
+</tr>
+<tr>
+<td><strong>Module</strong></td>
+<td>PIM &gt; Employee Personal Details</td>
+</tr>
+<tr>
+<td><strong>Steps to Reproduce</strong></td>
+<td>1. Log in as Admin 2. PIM &gt; open any employee 3. In Personal Details, change <strong>Last Name</strong> and click <strong>Save</strong> 4. Observe the &quot;Successfully Updated&quot; toast 5. Compare the name shown in the left header panel with the saved value</td>
+</tr>
+<tr>
+<td><strong>Expected Result</strong></td>
+<td>The header reflects the new name immediately after the save is confirmed</td>
+</tr>
+<tr>
+<td><strong>Actual Result</strong></td>
+<td>Header continues to show the previous name; the grid and header show the new value only after a full page reload</td>
+</tr>
+<tr>
+<td><strong>Severity</strong></td>
+<td><strong>Medium</strong></td>
+</tr>
+<tr>
+<td><strong>Priority</strong></td>
+<td><strong>P3</strong></td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>OrangeHRM demo, found during exploratory testing around TC-PIM-007 (which asserts field persistence via reload and therefore passes)</td>
+</tr>
+<tr>
+<td><strong>Evidence</strong></td>
+<td><code>[screenshot: pim-stale-header-after-save.png]</code> · <code>[screen recording: pim-header-refresh.mp4]</code></td>
+</tr>
+<tr>
+<td><strong>Reproducibility</strong></td>
+<td>Consistent</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>Open — note: not covered by a scripted case; RTM gap logged in the closure report with a proposed TC-PIM-013</td>
+</tr>
+</tbody></table></div>
+
+<footer>
+  <span>OrangeHRM Demo Automation — QA engagement package</span>
+  <span>Source: docs/07-defect-reports.md</span>
+</footer>
+</main>
+</div>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  mermaid.initialize({ startOnLoad: true, theme: dark ? "dark" : "neutral" });
+</script>
+</body>
+</html>

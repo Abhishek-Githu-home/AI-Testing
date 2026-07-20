@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STLC Mapping: OrangeHRM Test Automation Project — OrangeHRM QA</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --ink: #1f2430; --muted: #5b6472;
+    --accent: #146c60; --accent-soft: #e3f1ee; --border: #e2e6ec;
+    --code-bg: #f0f2f5; --th-bg: #eef1f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161b; --panel: #1c1f26; --ink: #e8eaf0; --muted: #9aa3b2;
+      --accent: #4fd1bb; --accent-soft: #1d3330; --border: #2b303a;
+      --code-bg: #262b34; --th-bg: #232833;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.65 "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  .layout { display: flex; min-height: 100vh; }
+  nav.sidebar {
+    width: 260px; flex-shrink: 0; padding: 24px 16px; border-right: 1px solid var(--border);
+    background: var(--panel); position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  nav.sidebar h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 12px; }
+  nav.sidebar a {
+    display: block; padding: 7px 10px; margin: 2px 0; border-radius: 8px;
+    color: var(--ink); text-decoration: none; font-size: 13.5px;
+  }
+  nav.sidebar a:hover { background: var(--accent-soft); }
+  nav.sidebar a.current { background: var(--accent); color: #fff; }
+  nav.sidebar .home { font-weight: 600; margin-bottom: 10px; color: var(--accent); }
+  main {
+    flex: 1; min-width: 0; padding: 40px clamp(20px, 5vw, 64px); max-width: 1080px;
+  }
+  main h1 { font-size: 30px; line-height: 1.25; border-bottom: 3px solid var(--accent); padding-bottom: 12px; }
+  main h2 { font-size: 22px; margin-top: 2.2em; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  main h3 { font-size: 17px; margin-top: 1.8em; }
+  a { color: var(--accent); }
+  .table-wrap { overflow-x: auto; margin: 1.2em 0; border: 1px solid var(--border); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { border-bottom: 1px solid var(--border); padding: 9px 12px; text-align: left; vertical-align: top; }
+  td + td, th + th { border-left: 1px solid var(--border); }
+  th { background: var(--th-bg); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--accent-soft); }
+  code { background: var(--code-bg); border-radius: 5px; padding: 2px 6px; font-size: .88em; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 4px solid var(--accent); margin: 1em 0; padding: 4px 18px; background: var(--panel); border-radius: 0 8px 8px 0; color: var(--muted); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2.5em 0; }
+  .crumb { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .crumb a { color: var(--muted); }
+  footer { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  /* hub page */
+  .hero { margin: 0 0 8px; }
+  .hero p.sub { color: var(--muted); max-width: 70ch; margin-top: 4px; }
+  .phase { margin-top: 34px; }
+  .phase h2 { border: none; margin: 0 0 14px; font-size: 15px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+  .card {
+    display: block; background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    padding: 18px 20px; text-decoration: none; color: var(--ink); transition: transform .12s, border-color .12s;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .num { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .05em; }
+  .card h3 { margin: 6px 0 8px; font-size: 16px; line-height: 1.35; }
+  .card p { margin: 0; font-size: 13.5px; color: var(--muted); }
+  @media (max-width: 860px) {
+    .layout { display: block; }
+    nav.sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); }
+  }
+  @media print { nav.sidebar { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+    <h2>QA Deliverables</h2>
+    <a href="index.html" class="home">⌂ Package overview</a>
+    <a href="01-sdlc-mapping.html">01 · SDLC Mapping: OrangeHRM Test Automation Project</a>
+<a href="02-stlc-mapping.html" class="current">02 · STLC Mapping: OrangeHRM Test Automation Project</a>
+<a href="03-test-plan.html">03 · Test Plan: OrangeHRM Demo Automation</a>
+<a href="04-hld-automation-framework.html">04 · High-Level Design (HLD): Automation Framework</a>
+<a href="05-lld-login-pim.html">05 · Low-Level Design (LLD): Login &amp; PIM Modules</a>
+<a href="06-test-case-catalogue.html">06 · Test Case Catalogue &amp; RTM: OrangeHRM Demo Automation</a>
+<a href="07-defect-reports.html">07 · Defect Reports: OrangeHRM Demo Automation</a>
+<a href="08-severity-priority-justification.html">08 · Severity vs. Priority Justification Note</a>
+<a href="09-test-execution-summary.html">09 · Test Execution Summary Report</a>
+<a href="10-test-closure-report.html">10 · Test Closure Report (STLC Exit Phase)</a>
+<a href="11-executive-summary.html">11 · Executive Summary: OrangeHRM Quality Assessment</a>
+  </nav>
+<main>
+<p class="crumb"><a href="index.html">Package overview</a> / 02</p>
+<h1>Artifact 2 — STLC Mapping: OrangeHRM Test Automation Project</h1>
+<p><strong>Project:</strong> OrangeHRM Demo Automation (Login, Admin, PIM, Leave, Dashboard)
+<strong>Author:</strong> QA Lead | <strong>Status:</strong> Baseline v1.0</p>
+<p>Each phase below lists what happens <em>for this project specifically</em>, plus explicit <strong>entry criteria</strong> (what must be true to start) and <strong>exit criteria</strong> (what must be true to declare the phase done).</p>
+<hr>
+<h2>Phase 1 — Requirement Analysis</h2>
+<p><strong>Activities for this project:</strong></p>
+<ul>
+<li>Explore the OrangeHRM demo manually with the Admin/admin123 account and document actual behaviour per module (no SRS exists — the app is the spec).</li>
+<li>Identify testable requirements per module, e.g.:<ul>
+<li><strong>Login:</strong> valid/invalid credentials, empty fields, &quot;Forgot your password?&quot; link, redirect to Dashboard on success.</li>
+<li><strong>Admin:</strong> search/add/edit/delete system users, role and status filters, record-count validation.</li>
+<li><strong>PIM:</strong> add employee (with/without login details), search employee, edit personal details, delete employee.</li>
+<li><strong>Leave:</strong> apply leave, leave list filters, entitlement view (constrained by what the Admin demo account can do).</li>
+<li><strong>Dashboard:</strong> widget presence, quick-launch tiles, post-login landing assertions.</li>
+</ul>
+</li>
+<li>Flag automation constraints: shared public environment, periodic data resets, no test API for seeding data (UI-only setup), no email verification possible.</li>
+<li>Classify requirements into Smoke / Regression candidates.</li>
+</ul>
+<p><strong>Entry criteria:</strong></p>
+<ul>
+<li>Demo application reachable and credentials verified.</li>
+<li>Project scope statement agreed (5 modules, Cypress + Playwright, JavaScript).</li>
+</ul>
+<p><strong>Exit criteria:</strong></p>
+<ul>
+<li>Requirements catalogue per module reviewed and signed off by QA Lead.</li>
+<li>Each requirement tagged automatable / not-automatable with reason.</li>
+<li>Open questions (e.g., Leave module permissions) logged with owners.</li>
+</ul>
+<hr>
+<h2>Phase 2 — Test Planning</h2>
+<p><strong>Activities for this project:</strong></p>
+<ul>
+<li>Produce the Test Plan (Artifact 3): scope, strategy, levels, environment, roles, risks, schedule, deliverables.</li>
+<li>Decide tooling and estimate effort per module; sequence modules (Login → Dashboard → Admin → PIM → Leave) so authentication utilities exist before dependent modules.</li>
+<li>Define defect-logging convention (GitHub Issues with severity/priority labels) and the flake-triage process.</li>
+</ul>
+<p><strong>Entry criteria:</strong></p>
+<ul>
+<li>Requirement Analysis exit criteria met.</li>
+<li>Requirements catalogue available.</li>
+</ul>
+<p><strong>Exit criteria:</strong></p>
+<ul>
+<li>Test Plan reviewed and approved.</li>
+<li>Effort estimate and schedule baselined.</li>
+<li>Risk register created with mitigations.</li>
+</ul>
+<hr>
+<h2>Phase 3 — Test Case Design</h2>
+<p><strong>Activities for this project:</strong></p>
+<ul>
+<li>Write manual test cases per module in Given/When/Then style, each with a unique ID (<code>TC-LOG-001</code>, <code>TC-PIM-014</code>, …), priority, and Smoke/Regression tag — these become the single source of truth that both the Cypress and the Playwright suites implement.</li>
+<li>Design test data: static fixtures (valid credentials, invalid-credential matrix) and dynamic data rules (employee names suffixed with a timestamp to survive the shared environment).</li>
+<li>Perform review: peer review of test cases against the requirements catalogue; traceability matrix mapping requirement → test case ID.</li>
+</ul>
+<p><strong>Entry criteria:</strong></p>
+<ul>
+<li>Approved Test Plan.</li>
+<li>Requirements catalogue stable (no open blocking questions).</li>
+</ul>
+<p><strong>Exit criteria:</strong></p>
+<ul>
+<li>100% of in-scope requirements traced to ≥1 test case.</li>
+<li>Test cases peer-reviewed; data design documented.</li>
+<li>Smoke subset identified (target: ≤10 min runtime).</li>
+</ul>
+<hr>
+<h2>Phase 4 — Test Environment Setup</h2>
+<p><strong>Activities for this project:</strong></p>
+<ul>
+<li>Local: Node LTS, Cypress and Playwright installed, browsers provisioned (<code>npx playwright install</code>), <code>.env</code> for credentials (never committed).</li>
+<li>Repo: folder structure per HLD, ESLint, <code>package.json</code> scripts (<code>test:smoke</code>, <code>test:regression</code>, per-module scripts).</li>
+<li>CI: GitHub Actions workflows (PR smoke, nightly regression), HTML report artifact upload.</li>
+<li>Environment validation (&quot;smoke the environment&quot;): a single login test must pass locally on all target browsers and in CI before any further authoring.</li>
+</ul>
+<p><strong>Entry criteria:</strong></p>
+<ul>
+<li>Test case design underway (at least Login cases ready).</li>
+<li>Repo access and CI runner availability confirmed.</li>
+</ul>
+<p><strong>Exit criteria:</strong></p>
+<ul>
+<li>Environment-validation login test green locally (3 browsers) and in CI.</li>
+<li>Reporting artifact downloadable from a CI run.</li>
+<li>README setup instructions verified on a clean machine.</li>
+</ul>
+<hr>
+<h2>Phase 5 — Test Execution</h2>
+<p><strong>Activities for this project:</strong></p>
+<ul>
+<li>Implement and execute automated cases module by module; every case executed 3× locally before merge, then via CI.</li>
+<li>Log defects found in the AUT (yes — demo apps have real bugs) as GitHub Issues with repro steps, screenshots, and severity; distinguish AUT defects from script defects in triage.</li>
+<li>Track execution status per test case ID (Pass / Fail / Blocked / Skipped) against the traceability matrix; monitor the nightly regression trend.</li>
+</ul>
+<p><strong>Entry criteria:</strong></p>
+<ul>
+<li>Environment Setup exit criteria met.</li>
+<li>Reviewed test cases available for the module under execution.</li>
+</ul>
+<p><strong>Exit criteria:</strong></p>
+<ul>
+<li>All planned cases executed; results recorded against test case IDs.</li>
+<li>No open Critical/High script defects; AUT defects logged and classified.</li>
+<li>Flake rate &lt; 2% over the last 10 CI regression runs.</li>
+</ul>
+<hr>
+<h2>Phase 6 — Test Closure</h2>
+<p><strong>Activities for this project:</strong></p>
+<ul>
+<li>Produce a Test Summary Report: coverage vs. plan, pass/fail statistics, defect summary, flake analysis, environment issues encountered.</li>
+<li>Retrospective: what slowed authoring (locator churn, demo resets), tooling comparison notes (Cypress vs. Playwright observations — valuable portfolio content).</li>
+<li>Archive: tag the release, freeze the traceability matrix, ensure reports are stored as CI artifacts.</li>
+<li>Handover: README and docs sufficient for a new engineer to run and extend the suites.</li>
+</ul>
+<p><strong>Entry criteria:</strong></p>
+<ul>
+<li>Test Execution exit criteria met for all five modules.</li>
+</ul>
+<p><strong>Exit criteria:</strong></p>
+<ul>
+<li>Test Summary Report published and reviewed.</li>
+<li>Retrospective actions logged.</li>
+<li>Repository tagged; documentation complete.</li>
+</ul>
+<hr>
+<h2>Summary table</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>STLC phase</th>
+<th>Key project activity</th>
+<th>Headline exit criterion</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Requirement Analysis</td>
+<td>Explore app, build requirements catalogue</td>
+<td>Catalogue signed off, automatability tagged</td>
+</tr>
+<tr>
+<td>Test Planning</td>
+<td>Test Plan, estimates, risk register</td>
+<td>Plan approved, schedule baselined</td>
+</tr>
+<tr>
+<td>Test Case Design</td>
+<td>G/W/T cases + traceability matrix + data design</td>
+<td>100% requirement coverage, peer-reviewed</td>
+</tr>
+<tr>
+<td>Environment Setup</td>
+<td>Local + CI + reporting pipeline</td>
+<td>Login test green on 3 browsers + CI</td>
+</tr>
+<tr>
+<td>Test Execution</td>
+<td>Module-by-module automation + defect logging</td>
+<td>All cases executed, flake &lt; 2%</td>
+</tr>
+<tr>
+<td>Test Closure</td>
+<td>Summary report, retrospective, archive</td>
+<td>Report published, repo tagged</td>
+</tr>
+</tbody></table></div>
+
+<footer>
+  <span>OrangeHRM Demo Automation — QA engagement package</span>
+  <span>Source: docs/02-stlc-mapping.md</span>
+</footer>
+</main>
+</div>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  mermaid.initialize({ startOnLoad: true, theme: dark ? "dark" : "neutral" });
+</script>
+</body>
+</html>
